@@ -21,7 +21,7 @@
 ###########################################################################
 #  Change values here													                            #
 #																		                                      #
-SDKVERSION="7.1"														                              #
+SDKVERSION="9.2"														                              #
 #																		                                      #
 ###########################################################################
 #																		                                      #
@@ -97,18 +97,18 @@ do
 	export CROSS_COMPILE="${DEVELOPER}/usr/bin/"  
   export XCFLAGS="-isysroot ${CROSS_TOP}/SDKs/${CROSS_SDK} -miphoneos-version-min=7.0 -I${INCLUDEPATH} -arch ${ARCH}"
       
-  if [ "${ARCH}" == "i386" ] || [ "${ARCH}" == "x86_64" ];
-  then
-  	export XLDFLAGS="-L${LIBPATH} -arch ${ARCH}"
-  else
+#  if [ "${ARCH}" == "i386" ] || [ "${ARCH}" == "x86_64" ];
+#  then
+#  	export XLDFLAGS="-L${LIBPATH} -arch ${ARCH}"
+#  else
   	export XLDFLAGS="-isysroot ${CROSS_TOP}/SDKs/${CROSS_SDK} -miphoneos-version-min=7.0 -L${LIBPATH} -arch ${ARCH}"
-  fi
-  
+#  fi
+
   OUTPATH="${BUILDPATH}/librtmp-${PLATFORM}${SDKVERSION}-${ARCH}.sdk"
   mkdir -p "${OUTPATH}"
   LOG="${OUTPATH}/build-librtmp.log"
   
-  make SYS=darwin >> "${LOG}" 2>&1  
+  make SYS=darwin >> "${LOG}" 2>&1
   make SYS=darwin prefix="${OUTPATH}" install  >> "${LOG}" 2>&1
   make clean >> "${LOG}" 2>&1
   
